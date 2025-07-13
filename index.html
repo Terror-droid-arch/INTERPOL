@@ -707,7 +707,7 @@
             try {
                 // В реальном приложении этот запрос должен идти через ваш сервер
                 // Для демонстрации используем публичный прокси
-                const response = await fetch(`/api/github-auth?code=${code}`);
+                const response = await fetch(`https://github-oauth-proxy.vercel.app/api/oauth?code=${code}`);
                 const data = await response.json();
                 
                 if (data.access_token) {
