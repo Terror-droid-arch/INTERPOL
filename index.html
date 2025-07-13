@@ -1,28 +1,728 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SOFTTRAXTION</title>
-    <link rel="stylesheet" href="style.css">
+    <title>INTERPOL - Elimination Archive</title>
+    <style>
+        :root {
+            --bg-color: #000000;
+            --text-color: #ffffff;
+            --accent: #00ffff;
+            --secondary-color: #111111;
+            --highlight: #ffffff;
+            --neon-glow: 0 0 10px;
+            --card-bg: #0a0a0a;
+        }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.03) 0%, transparent 20%),
+                radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.03) 0%, transparent 20%);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            border-bottom: 1px solid var(--accent);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        h1 {
+            color: var(--text-color);
+            text-align: center;
+            font-size: 4em;
+            text-shadow: 
+                var(--neon-glow) var(--accent),
+                0 0 20px var(--accent);
+            margin-bottom: 10px;
+            letter-spacing: 5px;
+            font-weight: bold;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            box-shadow: 0 0 10px var(--accent);
+        }
+        
+        .creators {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .creator {
+            position: relative;
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 8px 20px;
+            color: var(--text-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent);
+            box-shadow: 
+                inset 0 0 10px rgba(0, 255, 255, 0.2),
+                0 0 10px rgba(0, 255, 255, 0.2);
+        }
+        
+        .spark {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 50%;
+            background-color: white;
+            pointer-events: none;
+            animation: spark-fly 0.8s linear forwards;
+            filter: blur(0.5px);
+        }
+        
+        @keyframes spark-fly {
+            0% {
+                transform: translate(0, 0) scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--tx), var(--ty)) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        .description {
+            background-color: var(--card-bg);
+            padding: 25px;
+            margin-bottom: 40px;
+            border: 1px solid var(--accent);
+            box-shadow: 
+                inset 0 0 20px rgba(0, 255, 255, 0.1),
+                0 0 20px rgba(0, 255, 255, 0.2);
+            position: relative;
+        }
+        
+        .description h2 {
+            color: var(--text-color);
+            margin-top: 0;
+            text-shadow: var(--neon-glow) var(--accent);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .description h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .content-card {
+            background-color: var(--card-bg);
+            padding: 0;
+            border: 1px solid var(--accent);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                inset 0 0 10px rgba(0, 255, 255, 0.1),
+                0 0 20px rgba(0, 255, 255, 0.1);
+        }
+        
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                inset 0 0 20px rgba(0, 255, 255, 0.2),
+                0 0 30px rgba(0, 255, 255, 0.3);
+        }
+        
+        .content-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid var(--accent);
+        }
+        
+        .card-content {
+            padding: 15px;
+        }
+        
+        .content-card .title {
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+        
+        .content-card .target {
+            color: var(--accent);
+            font-size: 0.9em;
+            margin-bottom: 10px;
+            word-break: break-word;
+        }
+        
+        .content-card .date {
+            font-size: 0.8em;
+            color: #888;
+        }
+        
+        .upload-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent);
+            color: black;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 
+                0 0 20px var(--accent),
+                inset 0 0 10px rgba(255, 255, 255, 0.5);
+            transition: all 0.3s;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .upload-btn:hover {
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: 
+                0 0 30px var(--accent),
+                inset 0 0 15px rgba(255, 255, 255, 0.7);
+        }
+        
+        .upload-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        
+        .upload-container {
+            background-color: var(--card-bg);
+            padding: 30px;
+            border: 1px solid var(--accent);
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 
+                inset 0 0 20px rgba(0, 255, 255, 0.1),
+                0 0 30px rgba(0, 255, 255, 0.3);
+            position: relative;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: var(--accent);
+            font-size: 1.8em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .close-btn:hover {
+            transform: rotate(90deg);
+            text-shadow: 0 0 10px var(--accent);
+        }
+        
+        .upload-container h2 {
+            color: var(--text-color);
+            margin-top: 0;
+            text-shadow: var(--neon-glow) var(--accent);
+        }
+        
+        #uploadForm {
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent);
+        }
+        
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent);
+            color: white;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        #fileInput {
+            margin-bottom: 20px;
+        }
+        
+        #uploadForm button[type="submit"] {
+            background-color: var(--accent);
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+        }
+        
+        #uploadForm button[type="submit"]:hover {
+            background-color: white;
+            box-shadow: 0 0 20px var(--accent);
+        }
+        
+        #uploadStatus {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--accent);
+            text-align: center;
+        }
+        
+        footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 1px solid var(--accent);
+            text-align: center;
+            font-size: 0.9em;
+            color: #888;
+        }
+        
+        /* Terminal cursor effect */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: var(--accent);
+            margin-left: 5px;
+            animation: blink 1s infinite;
+            vertical-align: middle;
+        }
+        
+        /* Scanlines effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 255, 255, 0.03) 1px,
+                transparent 1px
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        /* Glitch effect */
+        .glitch {
+            position: relative;
+        }
+        
+        .glitch::before, .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.8;
+        }
+        
+        .glitch::before {
+            color: #00ffff;
+            z-index: -1;
+            animation: glitch-effect 3s infinite linear;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+        }
+        
+        .glitch::after {
+            color: #ff00ff;
+            z-index: -2;
+            animation: glitch-effect 2s infinite linear reverse;
+            clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+        }
+        
+        @keyframes glitch-effect {
+            0% { transform: translate(0); }
+            20% { transform: translate(-3px, 3px); }
+            40% { transform: translate(-3px, -3px); }
+            60% { transform: translate(3px, 3px); }
+            80% { transform: translate(3px, -3px); }
+            100% { transform: translate(0); }
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5em;
+            }
+            
+            .creators {
+                gap: 15px;
+            }
+            
+            .creator {
+                font-size: 1.2em;
+                padding: 6px 12px;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .upload-container {
+                padding: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <section class="hero">
-        <h1>Добро пожаловать в SOFTTRAXTION</h1>
-        <p>Тапай броу</p>
+    <div class="scanlines"></div>
+    <div class="container">
+        <header>
+            <h1 class="glitch" data-text="INTERPOL">INTERPOL<span class="cursor"></span></h1>
+            <div class="creators">
+                <div class="creator" id="markvilgelme">MarkVilgelme</div>
+                <div class="creator" id="psychonautu">psychonautu</div>
+                <div class="creator" id="sleep-paralysis">sleep paralysis</div>
+            </div>
+        </header>
         
-        <a href="https://t.me/SoftPoint16" class="tg-button">Тапнуть</a>
-        <a href="#about" class="button">О нас</a>
-        <a href="#contacts" class="button">Контакты</a>
-    </section>
-
-    <!-- Кастомный курсор -->
-    <div class="custom-cursor"></div>
-
-    <!-- Подключаем скрипты -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="script.js"></script>
+        <section class="description">
+            <h2>ELIMINATION ARCHIVE<span class="cursor"></span></h2>
+            <p>Classified database of confirmed eliminations. All entries are permanent and cannot be erased. Access restricted to authorized personnel only.</p>
+            <p>For official use only. Unauthorized access will be prosecuted.</p>
+        </section>
+        
+        <section class="content-display">
+            <div class="content-grid" id="contentGrid">
+                <!-- Default content -->
+                <div class="content-card">
+                    <img src="https://source.unsplash.com/random/600x400/?surveillance" alt="Operation">
+                    <div class="card-content">
+                        <p class="title">OPERATION: MIDNIGHT SHADOW</p>
+                        <p class="target">TARGET: [REDACTED]</p>
+                        <p class="date">2023-11-15 | CLASSIFIED</p>
+                    </div>
+                </div>
+                <div class="content-card">
+                    <img src="https://source.unsplash.com/random/600x400/?security,camera" alt="Operation">
+                    <div class="card-content">
+                        <p class="title">OPERATION: SILENT GHOST</p>
+                        <p class="target">TARGET: [REDACTED]</p>
+                        <p class="date">2023-09-22 | CLASSIFIED</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <button class="upload-btn" id="uploadBtn">+</button>
+        
+        <div class="upload-modal" id="uploadModal">
+            <div class="upload-container">
+                <span class="close-btn" id="closeBtn">×</span>
+                <h2>NEW ENTRY<span class="cursor"></span></h2>
+                <form id="uploadForm">
+                    <div class="form-group">
+                        <label for="operationName">OPERATION NAME:</label>
+                        <input type="text" id="operationName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="targetInfo">TARGET INFORMATION:</label>
+                        <textarea id="targetInfo" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fileInput">EVIDENCE (IMAGE/VIDEO):</label>
+                        <input type="file" id="fileInput" accept="image/*,video/*">
+                    </div>
+                    
+                    <button type="submit">SUBMIT TO ARCHIVE</button>
+                </form>
+                <div id="uploadStatus"></div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>INTERPOL ELIMINATION ARCHIVE v4.0 | TOP SECRET<span class="cursor"></span></p>
+        </footer>
+    </div>
+    
+    <script>
+        // Create white sparks for creator names
+        function createSparks(element) {
+            const rect = element.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            
+            for (let i = 0; i < 10; i++) {
+                const spark = document.createElement('div');
+                spark.className = 'spark';
+                
+                // Random direction with more spread
+                const angle = Math.random() * Math.PI * 2;
+                const distance = 50 + Math.random() * 80;
+                const tx = Math.cos(angle) * distance;
+                const ty = Math.sin(angle) * distance;
+                
+                // Random size and opacity
+                const size = 1 + Math.random() * 3;
+                spark.style.width = `${size}px`;
+                spark.style.height = `${size}px`;
+                spark.style.opacity = 0.7 + Math.random() * 0.3;
+                
+                spark.style.setProperty('--tx', `${tx}px`);
+                spark.style.setProperty('--ty', `${ty}px`);
+                
+                spark.style.left = `${centerX}px`;
+                spark.style.top = `${centerY}px`;
+                
+                // Random animation duration
+                const duration = 0.6 + Math.random() * 0.8;
+                spark.style.animationDuration = `${duration}s`;
+                
+                document.body.appendChild(spark);
+                
+                // Remove spark after animation
+                setTimeout(() => {
+                    spark.remove();
+                }, duration * 1000);
+            }
+        }
+        
+        // Set up spark effects for all creators
+        const creators = ['markvilgelme', 'psychonautu', 'sleep-paralysis'];
+        creators.forEach(id => {
+            const element = document.getElementById(id);
+            element.addEventListener('mouseover', () => {
+                createSparks(element);
+            });
+        });
+        
+        // Set up upload modal
+        const uploadBtn = document.getElementById('uploadBtn');
+        const uploadModal = document.getElementById('uploadModal');
+        const closeBtn = document.getElementById('closeBtn');
+        const uploadForm = document.getElementById('uploadForm');
+        const fileInput = document.getElementById('fileInput');
+        const operationName = document.getElementById('operationName');
+        const targetInfo = document.getElementById('targetInfo');
+        const uploadStatus = document.getElementById('uploadStatus');
+        const contentGrid = document.getElementById('contentGrid');
+        
+        uploadBtn.addEventListener('click', () => {
+            uploadModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeBtn.addEventListener('click', () => {
+            uploadModal.style.display = 'none';
+            document.body.style.overflow = '';
+            uploadStatus.innerHTML = '';
+        });
+        
+        // Close modal when clicking outside
+        uploadModal.addEventListener('click', (e) => {
+            if (e.target === uploadModal) {
+                uploadModal.style.display = 'none';
+                document.body.style.overflow = '';
+                uploadStatus.innerHTML = '';
+            }
+        });
+        
+        // Load saved content from localStorage
+        function loadContent() {
+            const savedContent = localStorage.getItem('interpolEliminations');
+            if (savedContent) {
+                contentGrid.innerHTML = savedContent;
+            }
+        }
+        
+        // Save content to localStorage
+        function saveContent() {
+            localStorage.setItem('interpolEliminations', contentGrid.innerHTML);
+        }
+        
+        // Handle form submissions
+        uploadForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const opName = operationName.value.trim();
+            const target = targetInfo.value.trim();
+            
+            if (!opName || !target) {
+                uploadStatus.innerHTML = '<span style="color:#ff3333;">ERROR: ALL FIELDS REQUIRED</span>';
+                return;
+            }
+            
+            uploadStatus.innerHTML = '<span style="color:#00ffff;">PROCESSING... ENCRYPTING DATA...</span>';
+            
+            setTimeout(() => {
+                if (fileInput.files.length > 0) {
+                    const file = fileInput.files[0];
+                    const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'video/mp4'];
+                    
+                    if (validTypes.includes(file.type)) {
+                        processWithFile(file, opName, target);
+                    } else {
+                        uploadStatus.innerHTML = '<span style="color:#ff3333;">ERROR: INVALID FILE TYPE</span>';
+                    }
+                } else {
+                    // Create entry without file
+                    createEntry(null, opName, target);
+                }
+            }, 1000);
+        });
+        
+        function processWithFile(file, opName, target) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                createEntry(e.target.result, opName, target);
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function createEntry(fileData, opName, target) {
+            let mediaContent = '';
+            if (fileData) {
+                if (fileData.startsWith('data:image')) {
+                    mediaContent = `<img src="${fileData}" alt="Evidence">`;
+                } else if (fileData.startsWith('data:video')) {
+                    mediaContent = `
+                        <video controls style="width:100%; height:200px; object-fit:cover;">
+                            <source src="${fileData}" type="video/mp4">
+                        </video>
+                    `;
+                }
+            } else {
+                mediaContent = `
+                    <div style="height:200px; display:flex; align-items:center; justify-content:center; background-color:#050505;">
+                        <div style="text-align:center; color:#666;">
+                            <div style="font-size:3em;">☠️</div>
+                            <p>NO MEDIA ATTACHED</p>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            const newEntry = document.createElement('div');
+            newEntry.className = 'content-card';
+            newEntry.innerHTML = `
+                ${mediaContent}
+                <div class="card-content">
+                    <p class="title">${opName.toUpperCase()}</p>
+                    <p class="target">TARGET: ${target}</p>
+                    <p class="date">${new Date().toLocaleDateString()} | CLASSIFIED</p>
+                </div>
+            `;
+            
+            contentGrid.prepend(newEntry);
+            saveContent();
+            
+            uploadStatus.innerHTML = '<span style="color:#00ff88;">ENTRY SUCCESSFULLY ARCHIVED</span>';
+            
+            // Reset form and close modal after delay
+            setTimeout(() => {
+                uploadForm.reset();
+                uploadModal.style.display = 'none';
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    uploadStatus.innerHTML = '';
+                }, 2000);
+            }, 1500);
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadContent();
+            
+            // Add occasional glitch effect to header
+            setInterval(() => {
+                const glitch = document.querySelector('.glitch');
+                glitch.style.animation = 'none';
+                void glitch.offsetWidth; // Trigger reflow
+                glitch.style.animation = null;
+            }, 15000);
+            
+            // Add random terminal effect
+            setInterval(() => {
+                if (Math.random() > 0.95) {
+                    const elements = document.querySelectorAll('h1, h2, .creator, footer p');
+                    elements.forEach(el => {
+                        el.style.textShadow = '0 0 15px #00ffff';
+                        setTimeout(() => {
+                            el.style.textShadow = '';
+                        }, 300);
+                    });
+                }
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
