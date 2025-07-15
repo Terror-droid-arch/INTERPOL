@@ -3,1128 +3,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INTERPOL - GitHub Archive</title>
+    <title>Terrordroidarch - Премиум подписка</title>
     <style>
         :root {
-            --bg-color: #000000;
-            --text-color: #ffffff;
-            --accent: #00ffff;
-            --secondary-color: #111111;
-            --highlight: #ffffff;
-            --neon-glow: 0 0 10px;
-            --card-bg: #0a0a0a;
+            --primary: #6c5ce7;
+            --dark: #2d3436;
+            --light: #f5f6fa;
+            --accent: #00b894;
         }
         
         body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Courier New', monospace;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
             margin: 0;
             padding: 0;
             line-height: 1.6;
-            overflow-x: hidden;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.03) 0%, transparent 20%),
-                radial-gradient(circle at 80% 70%, rgba(0, 255, 255, 0.03) 0%, transparent 20%);
         }
         
         .container {
-            width: 90%;
-            max-width: 1200px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
         
         header {
-            border-bottom: 1px solid var(--accent);
-            padding-bottom: 20px;
-            margin-bottom: 40px;
-            position: relative;
+            text-align: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary), #a29bfe);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         h1 {
-            color: var(--text-color);
-            text-align: center;
-            font-size: 4em;
-            text-shadow: 
-                var(--neon-glow) var(--accent),
-                0 0 20px var(--accent);
-            margin-bottom: 10px;
-            letter-spacing: 5px;
-            font-weight: bold;
-            text-transform: uppercase;
-            position: relative;
+            margin: 0;
+            font-size: 2.2rem;
         }
         
-        h1::after {
-            content: '';
-            position: absolute;
-            bottom: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 200px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            box-shadow: 0 0 10px var(--accent);
+        .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
         }
         
-        .creators {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
+        .features {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
-        .creator {
-            position: relative;
-            font-size: 1.5em;
-            font-weight: bold;
-            padding: 8px 20px;
-            color: var(--text-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--accent);
-            box-shadow: 
-                inset 0 0 10px rgba(0, 255, 255, 0.2),
-                0 0 10px rgba(0, 255, 255, 0.2);
-        }
-        
-        .spark {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            border-radius: 50%;
-            background-color: white;
-            pointer-events: none;
-            animation: spark-fly 0.8s linear forwards;
-            filter: blur(0.5px);
-        }
-        
-        @keyframes spark-fly {
-            0% {
-                transform: translate(0, 0) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(var(--tx), var(--ty)) scale(0);
-                opacity: 0;
-            }
-        }
-        
-        .description {
-            background-color: var(--card-bg);
-            padding: 25px;
-            margin-bottom: 40px;
-            border: 1px solid var(--accent);
-            box-shadow: 
-                inset 0 0 20px rgba(0, 255, 255, 0.1),
-                0 0 20px rgba(0, 255, 255, 0.2);
-            position: relative;
-        }
-        
-        .description h2 {
-            color: var(--text-color);
-            margin-top: 0;
-            text-shadow: var(--neon-glow) var(--accent);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .description h2::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, var(--accent), transparent);
-        }
-        
-        .content-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: 40px;
-        }
-        
-        .content-card {
-            background-color: var(--card-bg);
-            padding: 0;
-            border: 1px solid var(--accent);
-            transition: all 0.4s;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 
-                inset 0 0 10px rgba(0, 255, 255, 0.1),
-                0 0 20px rgba(0, 255, 255, 0.1);
-        }
-        
-        .content-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 
-                inset 0 0 20px rgba(0, 255, 255, 0.2),
-                0 0 30px rgba(0, 255, 255, 0.3);
-        }
-        
-        .content-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            display: block;
-            border-bottom: 1px solid var(--accent);
-        }
-        
-        .card-content {
-            padding: 15px;
-        }
-        
-        .content-card .title {
-            font-weight: bold;
-            color: var(--text-color);
-            margin-bottom: 10px;
-            word-break: break-word;
-        }
-        
-        .content-card .target {
-            color: var(--accent);
-            font-size: 0.9em;
-            margin-bottom: 10px;
-            word-break: break-word;
-        }
-        
-        .content-card .date {
-            font-size: 0.8em;
-            color: #888;
-        }
-        
-        .upload-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background-color: var(--accent);
-            color: black;
-            border: none;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.8em;
-            font-weight: bold;
-            box-shadow: 
-                0 0 20px var(--accent),
-                inset 0 0 10px rgba(255, 255, 255, 0.5);
-            transition: all 0.3s;
-            z-index: 100;
+        .feature {
             display: flex;
             align-items: center;
-            justify-content: center;
+            margin-bottom: 0.8rem;
         }
         
-        .upload-btn:hover {
-            transform: scale(1.1) rotate(90deg);
-            box-shadow: 
-                0 0 30px var(--accent),
-                inset 0 0 15px rgba(255, 255, 255, 0.7);
-        }
-        
-        .upload-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 200;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-        
-        .upload-container {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border: 1px solid var(--accent);
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 
-                inset 0 0 20px rgba(0, 255, 255, 0.1),
-                0 0 30px rgba(0, 255, 255, 0.3);
-            position: relative;
-        }
-        
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 15px;
+        .feature-icon {
             color: var(--accent);
-            font-size: 1.8em;
-            cursor: pointer;
-            transition: all 0.3s;
+            margin-right: 1rem;
+            font-size: 1.5rem;
         }
         
-        .close-btn:hover {
-            transform: rotate(90deg);
-            text-shadow: 0 0 10px var(--accent);
-        }
-        
-        .upload-container h2 {
-            color: var(--text-color);
-            margin-top: 0;
-            text-shadow: var(--neon-glow) var(--accent);
-        }
-        
-        #uploadForm {
-            margin-top: 20px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: var(--accent);
-        }
-        
-        .form-group input, 
-        .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--accent);
-            color: white;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-        
-        #fileInput {
-            margin-bottom: 20px;
-        }
-        
-        #uploadForm button[type="submit"] {
-            background-color: var(--accent);
-            color: black;
-            border: none;
-            padding: 12px 25px;
-            font-weight: bold;
-            cursor: pointer;
-            width: 100%;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-        }
-        
-        #uploadForm button[type="submit"]:hover {
-            background-color: white;
-            box-shadow: 0 0 20px var(--accent);
-        }
-        
-        #uploadStatus {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: rgba(0, 0, 0, 0.5);
-            border: 1px solid var(--accent);
-            text-align: center;
+        .stripe-container {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
         }
         
         footer {
-            margin-top: 60px;
-            padding-top: 20px;
-            border-top: 1px solid var(--accent);
             text-align: center;
-            font-size: 0.9em;
-            color: #888;
+            margin-top: 2rem;
+            color: #636e72;
+            font-size: 0.9rem;
         }
         
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        
-        .cursor {
-            display: inline-block;
-            width: 10px;
-            height: 20px;
-            background-color: var(--accent);
-            margin-left: 5px;
-            animation: blink 1s infinite;
-            vertical-align: middle;
-        }
-        
-        .scanlines {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(
-                to bottom,
-                rgba(0, 255, 255, 0.03) 1px,
-                transparent 1px
-            );
-            background-size: 100% 4px;
-            pointer-events: none;
-            z-index: 9999;
-        }
-        
-        .glitch {
-            position: relative;
-        }
-        
-        .glitch::before, .glitch::after {
-            content: attr(data-text);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0.8;
-        }
-        
-        .glitch::before {
-            color: #00ffff;
-            z-index: -1;
-            animation: glitch-effect 3s infinite linear;
-            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-        }
-        
-        .glitch::after {
-            color: #ff00ff;
-            z-index: -2;
-            animation: glitch-effect 2s infinite linear reverse;
-            clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
-        }
-        
-        @keyframes glitch-effect {
-            0% { transform: translate(0); }
-            20% { transform: translate(-3px, 3px); }
-            40% { transform: translate(-3px, -3px); }
-            60% { transform: translate(3px, 3px); }
-            80% { transform: translate(3px, -3px); }
-            100% { transform: translate(0); }
-        }
-
-        /* Стили для удаления */
-        .delete-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(255, 0, 0, 0.7);
-            color: white;
-            border: none;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1em;
-            font-weight: bold;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-            transition: all 0.3s;
-        }
-        
-        .content-card:hover .delete-btn {
-            display: flex;
-        }
-        
-        .delete-btn:hover {
-            background-color: rgba(255, 0, 0, 1);
-            transform: scale(1.1);
-        }
-        
-        .clear-all-btn {
-            background-color: rgba(255, 0, 0, 0.3);
-            color: white;
-            border: 1px solid var(--accent);
-            padding: 10px 20px;
-            cursor: pointer;
-            margin-top: 20px;
-            font-family: 'Courier New', monospace;
-            transition: all 0.3s;
-        }
-        
-        .clear-all-btn:hover {
-            background-color: rgba(255, 0, 0, 0.6);
-        }
-        
-        .confirmation-dialog {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 300;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .confirmation-container {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border: 1px solid var(--accent);
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-        }
-        
-        .confirmation-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-        
-        .confirmation-buttons button {
-            padding: 10px 20px;
-            cursor: pointer;
-            font-family: 'Courier New', monospace;
-        }
-        
-        .confirm-btn {
-            background-color: rgba(255, 0, 0, 0.7);
-            color: white;
-            border: none;
-        }
-        
-        .cancel-btn {
-            background-color: rgba(0, 255, 255, 0.2);
-            color: var(--accent);
-            border: 1px solid var(--accent);
-        }
-
-        /* Стили для авторизации */
-        .auth-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            color: white;
-        }
-        
-        .auth-box {
-            background-color: var(--card-bg);
-            padding: 30px;
-            border: 1px solid var(--accent);
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
-        }
-        
-        .auth-box h2 {
-            color: var(--accent);
-            margin-top: 0;
-        }
-        
-        .auth-btn {
-            background-color: var(--accent);
-            color: black;
-            border: none;
-            padding: 12px 25px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-            font-family: 'Courier New', monospace;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-        }
-        
-        .auth-btn:hover {
-            background-color: white;
-            box-shadow: 0 0 20px var(--accent);
-        }
-        
-        @media (max-width: 768px) {
+        @media (max-width: 600px) {
+            .container {
+                padding: 1rem;
+            }
+            
             h1 {
-                font-size: 2.5em;
-            }
-            
-            .creators {
-                gap: 15px;
-            }
-            
-            .creator {
-                font-size: 1.2em;
-                padding: 6px 12px;
-            }
-            
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .upload-container {
-                padding: 20px;
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="scanlines"></div>
-    <div class="auth-container" id="authContainer">
-        <div class="auth-box">
-            <h2>INTERPOL ARCHIVE ACCESS</h2>
-            <p>Для доступа к архиву требуется авторизация через GitHub</p>
-            <button class="auth-btn" id="loginBtn">ВОЙТИ ЧЕРЕЗ GITHUB</button>
-            <div id="authStatus" style="margin-top: 20px;"></div>
-        </div>
-    </div>
-
-    <div class="container" id="mainContainer" style="display: none;">
+    <div class="container">
         <header>
-            <h1 class="glitch" data-text="INTERPOL">INTERPOL<span class="cursor"></span></h1>
-            <h1 class="glitch" data-text="Создатели">Создатели<span class="cursor"></span></h1>
-            <div class="creators">
-                <div class="creator" id="markvilgelme">MarkVilgelme</div>
-                <div class="creator" id="psychonautu">psychonautu</div>
-                <div class="creator" id="sleep-paralysis">sleep paralysis</div>
-            </div>
+            <h1>Terrordroidarch Pro</h1>
+            <p class="subtitle">Премиум защита ваших данных</p>
         </header>
         
-        <section class="description">
-            <h2>ELIMINATION ARCHIVE<span class="cursor"></span></h2>
-            <p>Classified database of confirmed eliminations. All entries are permanent and cannot be erased. Access restricted to authorized personnel only.</p>
-            <p>For official use only. Unauthorized access will be prosecuted.</p>
-        </section>
-        
-        <section class="content-display">
-            <div class="content-grid" id="contentGrid">
-                <!-- Контент будет загружаться из GitHub -->
+        <div class="features">
+            <h2>Что вы получаете:</h2>
+            
+            <div class="feature">
+                <div class="feature-icon">🔍</div>
+                <div>Ежедневная проверка утечек данных</div>
             </div>
-        </section>
-        
-        <button class="upload-btn" id="uploadBtn">+</button>
-        
-        <div class="upload-modal" id="uploadModal">
-            <div class="upload-container">
-                <span class="close-btn" id="closeBtn">×</span>
-                <h2>NEW ENTRY<span class="cursor"></span></h2>
-                <form id="uploadForm">
-                    <div class="form-group">
-                        <label for="operationName">OPERATION NAME:</label>
-                        <input type="text" id="operationName" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="targetInfo">TARGET INFORMATION:</label>
-                        <textarea id="targetInfo" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="fileInput">EVIDENCE (IMAGE/VIDEO):</label>
-                        <input type="file" id="fileInput" accept="image/*,video/*">
-                    </div>
-                    
-                    <button type="submit">SUBMIT TO ARCHIVE</button>
-                </form>
-                <div id="uploadStatus"></div>
+            
+            <div class="feature">
+                <div class="feature-icon">🛡️</div>
+                <div>Персональные рекомендации по защите</div>
             </div>
+            
+            <div class="feature">
+                <div class="feature-icon">📧</div>
+                <div>Мгновенные уведомления об угрозах</div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-icon">💎</div>
+                <div>Приоритетная поддержка 24/7</div>
+            </div>
+        </div>
+        
+        <div class="stripe-container">
+            <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+            <stripe-pricing-table 
+                pricing-table-id="prctbl_1RlI2lCpQkxBTU2fqT9sU6SV"
+                publishable-key="pk_test_51RlAmTCpQkxBTU2fWqe2SmnNNKf25e2ovG53JEoZGDZpqx5e5qjKH68y9pWygVNgFYkNWHFTKUcHkSWnmoYBjDeF00bFBO5aI2">
+            </stripe-pricing-table>
         </div>
         
         <footer>
-            <p>INTERPOL ELIMINATION ARCHIVE v4.0 | TOP SECRET<span class="cursor"></span></p>
-            <button class="clear-all-btn" id="clearAllBtn">CLEAR ALL DATA</button>
-            <div id="userInfo" style="margin-top: 10px;"></div>
+            <p>© 2023 SecurityGuard Pro. Все права защищены.</p>
+            <p>Платежи обрабатываются через Stripe</p>
         </footer>
     </div>
-    
-    <div class="confirmation-dialog" id="confirmationDialog">
-        <div class="confirmation-container">
-            <h2>CONFIRM DESTRUCTION</h2>
-            <p>Are you sure you want to permanently delete ALL records?</p>
-            <p style="color: var(--accent);">This action cannot be undone!</p>
-            <div class="confirmation-buttons">
-                <button class="confirm-btn" id="confirmDeleteBtn">CONFIRM</button>
-                <button class="cancel-btn" id="cancelDeleteBtn">CANCEL</button>
-            </div>
-        </div>
-    </div>
-    
-    <script>
-        // Конфигурация GitHub OAuth
-        const GITHUB_CLIENT_ID = 'Ov23liqJWLVyAeHFKpIN'; // Замените на ваш Client ID
-        const GITHUB_REDIRECT_URI = 'https://terror-droid-arch.github.io/INTERPOL/'; // Замените на ваш Redirect URI
-        const REPO_OWNER = 'terror-droid-arch'; // Ваш GitHub username
-        const REPO_NAME = 'INTERPOL'; // Название вашего репозитория
-        const DATA_FILE_PATH = 'data/interpol_data.json)'; // Путь к файлу с данными
-        
-        // Проверяем параметры URL после редиректа от GitHub
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-        
-        // Элементы интерфейса
-        const authContainer = document.getElementById('authContainer');
-        const mainContainer = document.getElementById('mainContainer');
-        const loginBtn = document.getElementById('loginBtn');
-        const authStatus = document.getElementById('authStatus');
-        const userInfo = document.getElementById('userInfo');
-        
-        let accessToken = localStorage.getItem('github_access_token');
-        let currentUser = null;
-        
-        // Инициализация приложения
-        async function initApp() {
-            if (code && !accessToken) {
-                // Если есть код авторизации, но нет токена
-                await exchangeCodeForToken(code);
-            } else if (accessToken) {
-                // Если токен уже есть в localStorage
-                await getUserInfo();
-                showMainInterface();
-                loadDataFromGitHub();
-            } else {
-                // Показываем кнопку входа
-                loginBtn.addEventListener('click', () => {
-                    window.location.href = `https://github.com/login/oauth/authorize?client_id=${GITHUB_CLIENT_ID}&redirect_uri=${GITHUB_REDIRECT_URI}&scope=repo`;
-                });
-            }
-        }
-        
-        // Обмен кода авторизации на токен доступа
-        async function exchangeCodeForToken(code) {
-            authStatus.innerHTML = 'Получение токена доступа...';
-            
-            try {
-                // В реальном приложении этот запрос должен идти через ваш сервер
-                // Для демонстрации используем публичный прокси
-                const response = await fetch(`https://github-oauth-proxy.vercel.app/api/oauth?code=${code}`);
-                const data = await response.json();
-                
-                if (data.access_token) {
-                    accessToken = data.access_token;
-                    localStorage.setItem('github_access_token', accessToken);
-                    
-                    // Убираем код из URL
-                    window.history.replaceState({}, document.title, window.location.pathname);
-                    
-                    await getUserInfo();
-                    showMainInterface();
-                    loadDataFromGitHub();
-                } else {
-                    throw new Error('Не удалось получить токен доступа');
-                }
-            } catch (error) {
-                console.error('Ошибка авторизации:', error);
-                authStatus.innerHTML = `Ошибка авторизации: ${error.message}`;
-            }
-        }
-        
-        // Получение информации о пользователе
-        async function getUserInfo() {
-            try {
-                const response = await fetch('https://api.github.com/user', {
-                    headers: {
-                        'Authorization': `token ${accessToken}`
-                    }
-                });
-                
-                if (!response.ok) throw new Error('Ошибка получения данных пользователя');
-                
-                currentUser = await response.json();
-                userInfo.innerHTML = `Вы вошли как: <strong>${currentUser.login}</strong>`;
-            } catch (error) {
-                console.error('Ошибка получения данных пользователя:', error);
-                logout();
-            }
-        }
-        
-        // Показ основного интерфейса
-        function showMainInterface() {
-            authContainer.style.display = 'none';
-            mainContainer.style.display = 'block';
-        }
-        
-        // Выход из системы
-        function logout() {
-            localStorage.removeItem('github_access_token');
-            accessToken = null;
-            currentUser = null;
-            window.location.href = window.location.pathname;
-        }
-        
-        // Загрузка данных из GitHub
-        async function loadDataFromGitHub() {
-            try {
-                const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE_PATH}`, {
-                    headers: {
-                        'Authorization': `token ${accessToken}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (!response.ok) {
-                    // Если файл не существует, создаем пустой архив
-                    if (response.status === 404) {
-                        await createInitialDataFile();
-                        return;
-                    }
-                    throw new Error('Ошибка загрузки данных');
-                }
-                
-                const fileData = await response.json();
-                const content = JSON.parse(atob(fileData.content));
-                renderContent(content);
-            } catch (error) {
-                console.error('Ошибка загрузки данных:', error);
-                alert(`Ошибка загрузки данных: ${error.message}`);
-            }
-        }
-        
-        // Создание начального файла данных
-        async function createInitialDataFile() {
-            const initialData = {
-                entries: []
-            };
-            
-            await saveDataToGitHub(initialData, 'Initial commit: create data file');
-            renderContent(initialData);
-        }
-        
-        // Сохранение данных в GitHub
-        async function saveDataToGitHub(data, commitMessage) {
-            try {
-                // Сначала получаем текущий SHA файла (если существует)
-                let sha = null;
-                try {
-                    const getResponse = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE_PATH}`, {
-                        headers: {
-                            'Authorization': `token ${accessToken}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
-                    });
-                    
-                    if (getResponse.ok) {
-                        const fileData = await getResponse.json();
-                        sha = fileData.sha;
-                    }
-                } catch (e) {}
-                
-                const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE_PATH}`, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${accessToken}`,
-                        'Accept': 'application/vnd.github.v3+json',
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        message: commitMessage,
-                        content: btoa(JSON.stringify(data, null, 2)),
-                        sha: sha
-                    })
-                });
-                
-                if (!response.ok) {
-                    throw new Error('Ошибка сохранения данных');
-                }
-            } catch (error) {
-                console.error('Ошибка сохранения данных:', error);
-                throw error;
-            }
-        }
-        
-        // Отрисовка контента
-        function renderContent(data) {
-            const contentGrid = document.getElementById('contentGrid');
-            contentGrid.innerHTML = '';
-            
-            data.entries.forEach(entry => {
-                const entryElement = createEntryElement(entry);
-                contentGrid.appendChild(entryElement);
-            });
-        }
-        
-        // Создание элемента записи
-        function createEntryElement(entry) {
-            const entryElement = document.createElement('div');
-            entryElement.className = 'content-card';
-            
-            let mediaContent = '';
-            if (entry.mediaType === 'image') {
-                mediaContent = `<img src="${entry.mediaData}" alt="Evidence">`;
-            } else if (entry.mediaType === 'video') {
-                mediaContent = `
-                    <video controls style="width:100%; height:200px; object-fit:cover;">
-                        <source src="${entry.mediaData}" type="video/mp4">
-                    </video>
-                `;
-            } else {
-                mediaContent = `
-                    <div style="height:200px; display:flex; align-items:center; justify-content:center; background-color:#050505;">
-                        <div style="text-align:center; color:#666;">
-                            <div style="font-size:3em;">☠️</div>
-                            <p>NO MEDIA ATTACHED</p>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            entryElement.innerHTML = `
-                <button class="delete-btn" title="Delete entry">×</button>
-                ${mediaContent}
-                <div class="card-content">
-                    <p class="title">${entry.operationName}</p>
-                    <p class="target">TARGET: ${entry.targetInfo}</p>
-                    <p class="date">${entry.date} | CLASSIFIED</p>
-                </div>
-            `;
-            
-            // Добавляем обработчик удаления
-            entryElement.querySelector('.delete-btn').addEventListener('click', async () => {
-                if (confirm('Delete this entry permanently?')) {
-                    try {
-                        // Загружаем текущие данные
-                        const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE_PATH}`, {
-                            headers: {
-                                'Authorization': `token ${accessToken}`,
-                                'Accept': 'application/vnd.github.v3+json'
-                            }
-                        });
-                        
-                        if (!response.ok) throw new Error('Ошибка загрузки данных');
-                        
-                        const fileData = await response.json();
-                        const content = JSON.parse(atob(fileData.content));
-                        
-                        // Удаляем запись
-                        content.entries = content.entries.filter(e => e.id !== entry.id);
-                        
-                        // Сохраняем обновленные данные
-                        await saveDataToGitHub(content, `Deleted entry: ${entry.operationName}`);
-                        
-                        // Обновляем интерфейс
-                        renderContent(content);
-                    } catch (error) {
-                        console.error('Ошибка удаления записи:', error);
-                        alert(`Ошибка удаления записи: ${error.message}`);
-                    }
-                }
-            });
-            
-            return entryElement;
-        }
-        
-        // Обработчик формы добавления новой записи
-        document.getElementById('uploadForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const operationName = document.getElementById('operationName').value.trim();
-            const targetInfo = document.getElementById('targetInfo').value.trim();
-            const fileInput = document.getElementById('fileInput');
-            const uploadStatus = document.getElementById('uploadStatus');
-            
-            if (!operationName || !targetInfo) {
-                uploadStatus.innerHTML = '<span style="color:#ff3333;">ERROR: ALL FIELDS REQUIRED</span>';
-                return;
-            }
-            
-            uploadStatus.innerHTML = '<span style="color:#00ffff;">PROCESSING... ENCRYPTING DATA...</span>';
-            
-            try {
-                // Загружаем текущие данные
-                const response = await fetch(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${DATA_FILE_PATH}`, {
-                    headers: {
-                        'Authorization': `token ${accessToken}`,
-                        'Accept': 'application/vnd.github.v3+json'
-                    }
-                });
-                
-                if (!response.ok) throw new Error('Ошибка загрузки данных');
-                
-                const fileData = await response.json();
-                const content = JSON.parse(atob(fileData.content));
-                
-                // Создаем новую запись
-                const newEntry = {
-                    id: Date.now().toString(),
-                    operationName: operationName.toUpperCase(),
-                    targetInfo: targetInfo,
-                    date: new Date().toLocaleDateString(),
-                    mediaType: null,
-                    mediaData: null
-                };
-                
-                // Обрабатываем медиа-файл, если есть
-                if (fileInput.files.length > 0) {
-                    const file = fileInput.files[0];
-                    const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'video/mp4'];
-                    
-                    if (!validTypes.includes(file.type)) {
-                        throw new Error('Invalid file type. Only images and videos are allowed.');
-                    }
-                    
-                    const reader = new FileReader();
-                    reader.onload = async function(e) {
-                        newEntry.mediaType = file.type.startsWith('image') ? 'image' : 'video';
-                        newEntry.mediaData = e.target.result.split(',')[1]; // Сохраняем только данные base64
-                        
-                        // Добавляем новую запись
-                        content.entries.unshift(newEntry);
-                        
-                        // Сохраняем обновленные данные
-                        await saveDataToGitHub(content, `Added new entry: ${newEntry.operationName}`);
-                        
-                        // Обновляем интерфейс
-                        renderContent(content);
-                        
-                        // Закрываем модальное окно
-                        document.getElementById('uploadModal').style.display = 'none';
-                        document.body.style.overflow = '';
-                        document.getElementById('uploadForm').reset();
-                        uploadStatus.innerHTML = '';
-                    };
-                    
-                    reader.readAsDataURL(file);
-                    return;
-                }
-                
-                // Если нет медиа-файла
-                content.entries.unshift(newEntry);
-                await saveDataToGitHub(content, `Added new entry: ${newEntry.operationName}`);
-                renderContent(content);
-                
-                // Закрываем модальное окно
-                document.getElementById('uploadModal').style.display = 'none';
-                document.body.style.overflow = '';
-                document.getElementById('uploadForm').reset();
-                uploadStatus.innerHTML = '';
-                
-            } catch (error) {
-                console.error('Ошибка добавления записи:', error);
-                uploadStatus.innerHTML = `<span style="color:#ff3333;">ERROR: ${error.message}</span>`;
-            }
-        });
-        
-        // Обработчик кнопки очистки всех данных
-        document.getElementById('clearAllBtn').addEventListener('click', () => {
-            document.getElementById('confirmationDialog').style.display = 'flex';
-        });
-        
-        document.getElementById('cancelDeleteBtn').addEventListener('click', () => {
-            document.getElementById('confirmationDialog').style.display = 'none';
-        });
-        
-        document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
-            try {
-                await saveDataToGitHub({ entries: [] }, 'Cleared all data');
-                renderContent({ entries: [] });
-                document.getElementById('confirmationDialog').style.display = 'none';
-            } catch (error) {
-                console.error('Ошибка очистки данных:', error);
-                alert(`Ошибка очистки данных: ${error.message}`);
-            }
-        });
-        
-        // Инициализация приложения
-        initApp();
-        
-        // Остальные функции (искры, анимации и т.д.) остаются без изменений
-        function createSparks(element) {
-            const rect = element.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            
-            for (let i = 0; i < 10; i++) {
-                const spark = document.createElement('div');
-                spark.className = 'spark';
-                
-                const angle = Math.random() * Math.PI * 2;
-                const distance = 50 + Math.random() * 80;
-                const tx = Math.cos(angle) * distance;
-                const ty = Math.sin(angle) * distance;
-                
-                const size = 1 + Math.random() * 3;
-                spark.style.width = `${size}px`;
-                spark.style.height = `${size}px`;
-                spark.style.opacity = 0.7 + Math.random() * 0.3;
-                
-                spark.style.setProperty('--tx', `${tx}px`);
-                spark.style.setProperty('--ty', `${ty}px`);
-                
-                spark.style.left = `${centerX}px`;
-                spark.style.top = `${centerY}px`;
-                
-                const duration = 0.6 + Math.random() * 0.8;
-                spark.style.animationDuration = `${duration}s`;
-                
-                document.body.appendChild(spark);
-                
-                setTimeout(() => {
-                    spark.remove();
-                }, duration * 1000);
-            }
-        }
-        
-        const creators = ['markvilgelme', 'psychonautu', 'sleep-paralysis'];
-        creators.forEach(id => {
-            const element = document.getElementById(id);
-            element.addEventListener('mouseover', () => {
-                createSparks(element);
-            });
-        });
-        
-        const uploadBtn = document.getElementById('uploadBtn');
-        const uploadModal = document.getElementById('uploadModal');
-        const closeBtn = document.getElementById('closeBtn');
-        
-        uploadBtn.addEventListener('click', () => {
-            uploadModal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        });
-        
-        closeBtn.addEventListener('click', () => {
-            uploadModal.style.display = 'none';
-            document.body.style.overflow = '';
-            document.getElementById('uploadStatus').innerHTML = '';
-        });
-        
-        uploadModal.addEventListener('click', (e) => {
-            if (e.target === uploadModal) {
-                uploadModal.style.display = 'none';
-                document.body.style.overflow = '';
-                document.getElementById('uploadStatus').innerHTML = '';
-            }
-        });
-        
-        // Глитч-эффект
-        setInterval(() => {
-            const glitch = document.querySelector('.glitch');
-            glitch.style.animation = 'none';
-            void glitch.offsetWidth;
-            glitch.style.animation = null;
-        }, 15000);
-        
-        // Эффект терминала
-        setInterval(() => {
-            if (Math.random() > 0.95) {
-                const elements = document.querySelectorAll('h1, h2, .creator, footer p');
-                elements.forEach(el => {
-                    el.style.textShadow = '0 0 15px #00ffff';
-                    setTimeout(() => {
-                        el.style.textShadow = '';
-                    }, 300);
-                });
-            }
-        }, 5000);
-    </script>
 </body>
 </html>
