@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment Success</title>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const sessionId = urlParams.get('session_id');
+        if (sessionId) {
+            setTimeout(() => {
+                window.location.href = `https://t.me/Terrordroidarch_bot?start=payment_success_${sessionId}`;
+            }, 3000);
+        }
+    </script>
+</head>
+<body>
+    <h1>Платеж успешен!</h1>
+    <p>Вы будете перенаправлены в бота...</p>
+</body>
+</html>
